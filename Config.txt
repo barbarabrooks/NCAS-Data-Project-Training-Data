@@ -1,0 +1,106 @@
+# Configuration file for Data Project Training Data Production
+# Required by training_data_v1.py
+# Develped by Barbara Brooks <barbara.brooks@ncas.ac.uk>
+# 05/2020
+
+# Version: version number of data set
+# Accepted values: 1, 2, 3, .....
+# Single entry
+##### Version Start - do not remove #####
+2
+##### Version End - do not remove #####
+
+# Mode: indicates the deployment mode
+# Accepted values: all, land, air, sea
+# Edit as appropriate. 
+#       If empty all modes will be covered
+#       Delete lines that are not apropriate
+##### Mode Start - do not remove ##### 
+<all>
+<land>
+<sea>
+air
+##### Mode End - do not remove #####
+
+# Instrument: which instrument 
+# Accepted values: all, <instrument name>
+# Edit as appropriate. 
+#       If empty what files are generated will be driven by the list of data products
+#       New line for each instrument
+#       If all encountered any instrument listed will be ignored
+##### Instrument Start - do not remove ##### 
+<all>
+<instrument>
+<instrument>
+<instrument>
+<instrument>
+<instrument>
+##### Instrument End - do not remove #####
+
+# Data Product: which data product 
+# Accepted values: all, <data product name>
+# Edit as appropriate. 
+#       If empty what files are generated will be driven by the list of insrument
+#       New line for each data product
+#       If all encountered any data products listed will be ignored
+##### Data Product Start - do not remove ##### 
+<all>
+<acoustic-backscatter-winds>
+<aerosol-backscatter-radial-winds>
+<aerosol-backscatter>
+<aerosol-concentration>
+<aerosol-extinction>
+<aerosol-no3-so4-nh3-org-concentration>
+<aerosol-optical-depth>
+<aerosol-size-distribution>
+<boundary-layer-temperature-profiles>
+<boundary-layer-thickness>
+<brightness-temperature>
+<ch4-concentration>
+ch4-n2o-co2-co-concentration
+<cloud-base>
+<cloud-coverage>
+<co-concentration>
+<co-h2-concentration>
+<co2-concentration>
+<depolarisation-ratio>
+<dew-point>
+<flux-components>
+<flux-estimates>
+<full-troposphere-temperature-profiles>
+<h2-concentration>
+<halocarbon-concentration>
+<iwv-lwp>
+<liquid-water-content>
+<mean-co2-h2o>
+<mean-winds>
+<mean-winds-profile>
+<moisture-profiles>
+<n2o-concentration>
+<n2o-sf6-concentration>
+<no2-concentration>
+<nox-noxy-concentration>
+<o2-concentration>
+<o2n2-concentration-ratio>
+<o3-concentration>
+<o3-concentration-profile>
+<oh-concentration>
+<peroxyacetyl-nitrate-concentration>
+<photolysis-frequencies>
+<pm-concentration>
+<precipitation>
+<radiation>
+<radon-concentration>
+<rain-lwc-velocity-reflectivity>
+<sf6-concentration>
+<size-concentration-spectra>
+<snr-winds>
+<so2-concentration>
+<soil>
+<solar-actinic-flux>
+<sonde>
+<stability-indices>
+<surface-met>
+<tgm-concentration>
+<voc-concentration>
+##### Data Product End - do not remove #####
