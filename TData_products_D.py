@@ -5,7 +5,7 @@ def depolarisation_ratio(meta, mode, nc, ver):
    import numpy as np
    
    # create time dat and flag variables  
-   gates = 100;
+   gates = 100; dg = 30
    [ET, DT, DoY] = dat.create_time(meta)
    [lat, lon] = dat.create_pos(ET, mode)
    
@@ -17,7 +17,7 @@ def depolarisation_ratio(meta, mode, nc, ver):
    EL_2d = np.empty([len(ET), angles])
    min_AZ = 23; max_AZ = 23
    min_EL = 88; max_EL = 88
-   for x in range(0, len(ET))::
+   for x in range(0, len(ET)):
       AZ_2d[x, :] = np.ones([angles]) * 23
       EL_2d[x, :] = np.ones([angles]) * 88
  
@@ -25,7 +25,7 @@ def depolarisation_ratio(meta, mode, nc, ver):
    data_3d = np.empty([len(ET), gates, angles])
    range_3d = np.empty([len(ET), gates, angles])
    flag_3d = np.empty([len(ET), gates, angles])
-   for x in range(0, len(ET))::
+   for x in range(0, len(ET)):
       for y in range(0, gates):
          for z in range(0, angles):
             data_3d[x, y, z] = data_1d[x]

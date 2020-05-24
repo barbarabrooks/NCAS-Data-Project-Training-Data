@@ -279,6 +279,8 @@ def do_run(df, mode, run_list, ver, logfile):
       # clean up name and product strings
       nm = run_list[x,0]
       dp = run_list[x,1]
+      
+      print('Run number: ',x,' of ', len(run_list),'. ', run_list[x,0], run_list[x,1])
      
       # pull out appropriate line from meta file
       inst = df.loc[:, 'instrument\n':'instrument\n':1].values

@@ -7,7 +7,7 @@
 # Accepted values: 1, 2, 3, .....
 # Single entry
 ##### Version Start - do not remove #####
-2
+2.0
 ##### Version End - do not remove #####
 
 # Mode: indicates the deployment mode
@@ -17,9 +17,9 @@
 #       Delete lines that are not apropriate
 ##### Mode Start - do not remove ##### 
 <all>
-<land>
+land
 <sea>
-air
+<air>
 ##### Mode End - do not remove #####
 
 # Instrument: which instrument 
@@ -44,7 +44,7 @@ air
 #       New line for each data product
 #       If all encountered any data products listed will be ignored
 ##### Data Product Start - do not remove ##### 
-<all>
+all
 <acoustic-backscatter-winds>
 <aerosol-backscatter-radial-winds>
 <aerosol-backscatter>
@@ -57,7 +57,7 @@ air
 <boundary-layer-thickness>
 <brightness-temperature>
 <ch4-concentration>
-ch4-n2o-co2-co-concentration
+<ch4-n2o-co2-co-concentration>
 <cloud-base>
 <cloud-coverage>
 <co-concentration>

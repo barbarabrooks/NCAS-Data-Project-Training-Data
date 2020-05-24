@@ -20,7 +20,7 @@ def boundary_layer_temperature_profiles(meta, mode, nc, ver):
    flag_2d = np.empty([len(ET), gates])
    alt_2d = np.empty([len(ET), gates])
          
-   for x in range(0, len(ET))::
+   for x in range(0, len(ET)):
       for y in range(0, gates):
          data_2d[x,y] = data_1d[x]
          flag_2d[x,y] = flag_1d[x] 
@@ -660,7 +660,7 @@ def brightness_temperature(meta, mode, nc, ver):
    data_2d = np.empty([len(ET), freq])
    flag_2d = np.empty([len(ET), freq])
          
-   for x in range(0, len(ET))::
+   for x in range(0, len(ET)):
       for y in range(0, freq):
          data_2d[x,y] = data_1d[x]
          flag_2d[x,y] = flag_1d[x] 
