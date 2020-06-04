@@ -386,12 +386,11 @@ def precipitation(meta, mode, nc, ver):
    
    # write specific global attrib
    nc.product_version = ver
-   nc.setncattr('measurement_technique', 'drop counting')
-   nc.setncattr('drop size in mm', '0.01 mm')
-   nc.setncattr('amount', '0.1 mm')
-   nc.setncattr('width of rain gauge throat', '20 cm')
-   nc.setncattr('laser wavelength', '785 nm')
-   nc.setncattr('sample area', '45 cm2')
+   nc.setncattr('measurement_technique', 'drop_counting')
+   nc.setncattr('measurement_quanta', '0.01 mm')
+   nc.setncattr('collection_throat_diameter', '20 cm')
+   nc.setncattr('laser_wavelength', '785 nm')
+   nc.setncattr('laser_sample_area', '45 cm2')
    
    # write common dimensions
    com.dimensions(nc, ET, lat, lon)
