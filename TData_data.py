@@ -79,13 +79,9 @@ def create_data_flag(ET):
          flag[x] = 3
       if amp[x] == 0:
          flag[x] = 4    
-   
-   #find min and max of data with flag 1
-   XX = data
-   np.putmask(XX, flag != 1, np.nan)
-   min_dat = np.nanmin(XX)
-   max_dat = np.nanmax(XX)
-   
+   min_dat = np.min(data[np.where(flag == 1)])
+   max_dat = np.max(data[np.where(flag == 1)])
+ 
    del np
 
    return data, flag, min_dat, max_dat
