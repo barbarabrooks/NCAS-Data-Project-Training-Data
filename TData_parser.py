@@ -496,25 +496,10 @@ def do_run(df, mode, run_list, ver, logfile):
          
       if (dp == 'aerosol-size-distribution'):
          import TData_products_A as prodA
-         if 'ncas-caps-1' in nm:
-            # set up all naming options
-            opt11 = 'cas'; opt21 = ''; opt31 = ''
-            opt12 = 'cis'; opt22 = ''; opt32 = ''         
-            
-            # create nc file
-            nc = prod.create_NC_file(nm, dp, ver, opt11, opt21, opt31, logfile, mode)
-            prodA.aerosol_size_distribution(nm, meta, mode, nc, ver)
-            nc.close()
-         
-            # create nc file
-            nc = prod.create_NC_file(nm, dp, ver, opt12, opt22, opt32, logfile, mode)
-            prodA.aerosol_size_distribution(nm, meta, mode, nc, ver)
-            nc.close()
-         else:
-            # create nc file
-            nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-            prodA.aerosol_size_distribution(nm, meta, mode, nc, ver)
-            nc.close()
+         # create nc file
+         nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
+         prodA.aerosol_size_distribution(nm, meta, mode, nc, ver)
+         nc.close()
             
          del prodA
       
@@ -830,6 +815,31 @@ def do_run(df, mode, run_list, ver, logfile):
          del prodO         
       
       # P
+         
+      if (dp == 'particle-size-distribution'):
+         import TData_products_P as prodP
+         if 'ncas-caps-1' in nm:
+            # set up all naming options
+            opt11 = 'cas'; opt21 = ''; opt31 = ''
+            opt12 = 'cip'; opt22 = ''; opt32 = ''         
+            
+            # create nc file
+            nc = prod.create_NC_file(nm, dp, ver, opt11, opt21, opt31, logfile, mode)
+            prodP.particle_size_distribution(nm, meta, mode, nc, ver)
+            nc.close()
+         
+            # create nc file
+            nc = prod.create_NC_file(nm, dp, ver, opt12, opt22, opt32, logfile, mode)
+            prodP.particle_size_distribution(nm, meta, mode, nc, ver)
+            nc.close()
+         else:
+            # create nc file
+            nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
+            prodP.particle_size_distribution(nm, meta, mode, nc, ver)
+            nc.close()
+            
+         del prodP
+      
       if (dp == 'peroxyacetyl-nitrate-concentration'):
          import TData_products_P as prodP
          # create nc file
