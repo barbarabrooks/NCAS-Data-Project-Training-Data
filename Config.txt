@@ -7,8 +7,15 @@
 # Accepted values: 1, 2, 3, .....
 # Single entry
 ##### Version Start - do not remove #####
-2.0
+0.1
 ##### Version End - do not remove #####
+
+# Vocabulary: version number of vocabulary to use
+# Accepted values: 1.1, 2.0
+# Single entry
+##### Vocabulary Start - do not remove #####
+2.0
+##### Vocabulary End - do not remove #####
 
 # Mode: indicates the deployment mode
 # Accepted values: all, land, air, sea
@@ -30,6 +37,9 @@ land
 #       If all encountered any instrument listed will be ignored
 ##### Instrument Start - do not remove ##### 
 <all>
+<ncas-2b-1chan-o3-1>
+<ncas-cpc-3010-1>
+<ncas-opc-1>
 <instrument>
 <instrument>
 <instrument>
@@ -85,6 +95,7 @@ all
 <o3-concentration>
 <o3-concentration-profile>
 <oh-concentration>
+<particle-size-distribution>
 <peroxyacetyl-nitrate-concentration>
 <photolysis-frequencies>
 <pm-concentration>

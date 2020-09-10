@@ -1235,6 +1235,17 @@ def aerosol_size_distribution(nm, meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(dd_2d)      
       
+   v = nc.createVariable('ambient_aerosol_number_per_channel', np.float32, ('time', 'index',), fill_value=-1.00e+20)
+   #variable attributes
+   v.units = 'cm3-1'
+   v.long_name = 'Ambient Aerosol Number per Channel (dN)'
+   v.valid_min = np.float32(min_dat)
+   v.valid_max = np.float32(max_dat)
+   v.cell_methods = 'time: mean'
+   v.coordinates = 'latitude longitude'
+   #write data
+   v[:,:] = np.float32(data_2d)
+   
    v = nc.createVariable('ambient_aerosol_size_distribution', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    #variable attributes
    v.units = 'cm3-1 um-1'

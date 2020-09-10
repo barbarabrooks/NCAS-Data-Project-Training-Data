@@ -1,10 +1,16 @@
-def read_meta(logfile):
+def read_meta(logfile, vocab_ver):
    import pandas as pd
    from datetime import datetime
    
    # read in meta
+   if vocab_ver == "1.1":
+      fn = "meta_1.1.xlsx"
+      
+   if vocab_ver == "2.0":
+      fn = "meta_2.0.xlsx"
+   
    try:
-      df = pd.read_excel("meta.xlsx")
+      df = pd.read_excel(fn)
    except:
       # exit if problem encountered
       print("Unable to open meta.xlsx. This program will terminate")
@@ -166,12 +172,24 @@ def read_config(logfile):
    for x in range (0, len(lines)):
       if (ss1 in lines[x]):
          ver = lines[x+1].strip('\n')        
-         break    
+         break  
+
+   # 4. Vocabulary version
+   # Create a list called ver
+   
+   # find the start of deployment mode info block
+   x_st = 0; x_ed = 0;
+   ss1 = "Vocabulary Start"
+   for x in range (0, len(lines)):
+      if (ss1 in lines[x]):
+         vocab_ver = lines[x+1].strip('\n')        
+         break 
+         
    
    #delete the config file as not needed now
    del lines, datetime
       
-   return mode, instrument, data_product, ver
+   return mode, instrument, data_product, ver, vocab_ver
    
 def create_runs(name, name_product, mode, instrument, data_product):
    # create temporary run list
@@ -297,7 +315,7 @@ def do_run(df, mode, run_list, ver, logfile):
       for x in range (0, len(header)):
          meta[x, 0] = header[x]
          meta[x, 1] = data[x]
-         
+      
       # set default file naming options
       opt1 = ''; opt2 = ''; opt3 = ''
       
@@ -814,8 +832,7 @@ def do_run(df, mode, run_list, ver, logfile):
 
          del prodO         
       
-      # P
-         
+      # P   
       if (dp == 'particle-size-distribution'):
          import TData_products_P as prodP
          if 'ncas-caps-1' in nm:
@@ -839,7 +856,7 @@ def do_run(df, mode, run_list, ver, logfile):
             nc.close()
             
          del prodP
-      
+   
       if (dp == 'peroxyacetyl-nitrate-concentration'):
          import TData_products_P as prodP
          # create nc file
@@ -1036,10 +1053,13 @@ def t_control(logfile):
    [name, name_product] = read_lookup(logfile)
  
    # read in and process config file   
-   [mode, instrument, data_product, ver] = read_config(logfile)
+   [mode, instrument, data_product, ver, vocab_ver] = read_config(logfile)
+   print("Deployment mode: ", mode)
+   print("Data Set Version: ", ver)
+   print("Vocabulary Version: ", vocab_ver)
    
    # read in meta file
-   df = read_meta(logfile)
+   df = read_meta(logfile, vocab_ver)
    
    # creat list of files
    run_list = create_runs(name, name_product, mode, instrument, data_product)

@@ -71,10 +71,15 @@ except FileExistsError:
     
 # check for meta
 try:
-    path.exists("meta.xlsx")
-    print("meta.xlsx file detected")   
+    path.exists("meta_1.1.xlsx")
+    print("meta_1.1.xlsx file detected")  
+    
+    path.exists("meta_2.0.xlsx")
+    print("meta_2.0.xlsx file detected")
+    
     g = open(logfile, 'a')
-    g.write(datetime.utcnow().isoformat() + ' meta.xlsx file detected.\n')
+    g.write(datetime.utcnow().isoformat() + ' meta_1.1.xlsx file detected.\n')
+    g.write(datetime.utcnow().isoformat() + ' meta_2.0.xlsx file detected.\n')
     g.close()     
 except FileExistsError:
     print("meta.xlsx file missing. Program will terminate.")
