@@ -591,7 +591,7 @@ def nox_noxy_concentration(meta, mode, nc, ver):
    #write data
    v[:] = np.int8(flag_1d)
    
-   v = nc.createVariable('qc_flag-no2', np.int8, ('time',))
+   v = nc.createVariable('qc_flag_no2', np.int8, ('time',))
    #variable attribute
    v.units = '1'
    v.long_name = 'Data Quality Flag: NO2'

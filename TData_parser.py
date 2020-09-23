@@ -288,7 +288,7 @@ def create_runs(name, name_product, mode, instrument, data_product):
    
    return run_list
       
-def do_run(df, mode, run_list, ver, logfile):
+def do_run(df, mode, run_list, ver, logfile,  vocab_ver):
    import pandas as pd
    import numpy as np
    import TData_products as prod
@@ -326,7 +326,7 @@ def do_run(df, mode, run_list, ver, logfile):
          
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodA.acoustic_backscatter_winds(meta, mode, nc, ver)
+         prodA.acoustic_backscatter_winds(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          del prodA
@@ -466,12 +466,12 @@ def do_run(df, mode, run_list, ver, logfile):
          
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt11, opt21, opt31, logfile, mode)
-         prodA.aerosol_backscatter(meta, mode, nc, ver)
+         prodA.aerosol_backscatter(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt12, opt22, opt32, logfile, mode)
-         prodA.aerosol_backscatter(meta, mode, nc, ver)
+         prodA.aerosol_backscatter(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          del prodA
@@ -489,7 +489,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_A as prodA
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodA.aerosol_extinction(meta, mode, nc, ver)
+         prodA.aerosol_extinction(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          del prodA
@@ -526,7 +526,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_B as prodB
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodB.boundary_layer_temperature_profiles(meta, mode, nc, ver)
+         prodB.boundary_layer_temperature_profiles(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          del prodB
@@ -665,7 +665,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_F as prodF
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodF.full_troposphere_temperature_profiles(meta, mode, nc, ver)
+         prodF.full_troposphere_temperature_profiles(meta, mode, nc, ver, vocab_ver)
          nc.close() 
          
          del prodF
@@ -735,7 +735,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_M as prodM
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodM.mean_winds_profile(meta, mode, nc, ver)
+         prodM.mean_winds_profile(meta, mode, nc, ver, vocab_ver)
          nc.close() 
          
          del prodM
@@ -744,7 +744,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_M as prodM
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodM.moisture_profiles(meta, mode, nc, ver)
+         prodM.moisture_profiles(meta, mode, nc, ver, vocab_ver)
          nc.close() 
          
          del prodM
@@ -818,7 +818,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_O as prodO
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodO.o3_concentration_profile(meta, mode, nc, ver)
+         prodO.o3_concentration_profile(meta, mode, nc, ver, vocab_ver)
          nc.close() 
          
          del prodO
@@ -917,7 +917,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_R as prodR
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodR.rain_lwc_velocity_reflectivity(meta, mode, nc, ver)
+         prodR.rain_lwc_velocity_reflectivity(meta, mode, nc, ver, vocab_ver)
          nc.close() 
          
          del prodR
@@ -936,7 +936,7 @@ def do_run(df, mode, run_list, ver, logfile):
          import TData_products_S as prodS
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode)
-         prodS.size_concentration_spectra(meta, mode, nc, ver)
+         prodS.size_concentration_spectra(meta, mode, nc, ver, vocab_ver)
          nc.close()
 
          del prodS         
@@ -949,12 +949,12 @@ def do_run(df, mode, run_list, ver, logfile):
          
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt11, opt21, opt31, logfile, mode)
-         prodS.snr_winds(meta, mode, nc, ver)
+         prodS.snr_winds(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          # create nc file
          nc = prod.create_NC_file(nm, dp, ver, opt12, opt22, opt32, logfile, mode)
-         prodS.snr_winds(meta, mode, nc, ver)
+         prodS.snr_winds(meta, mode, nc, ver, vocab_ver)
          nc.close()
          
          del prodS
@@ -1068,22 +1068,22 @@ def t_control(logfile):
    for x in range (0, len(mode)):
       if ('all' in mode[x]):
          md = 'land'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)
          
          md = 'sea'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)
          
          md = 'air'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)
          
       if ('land' in mode[x]):
          md = 'land'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)
          
       if ('air' in mode[x]):
          md = 'air'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)
          
       if ('sea' in mode[x]):
          md = 'sea'
-         do_run(df, md, run_list, ver, logfile)
+         do_run(df, md, run_list, ver, logfile, vocab_ver)

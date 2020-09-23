@@ -1,5 +1,5 @@
 # A
-def acoustic_backscatter_winds(meta, mode, nc, ver):
+def acoustic_backscatter_winds(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -37,7 +37,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -46,7 +46,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)
    
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -59,12 +59,12 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('sound_intensity_level_in_air', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('sound_intensity_level_in_air', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -79,7 +79,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -94,7 +94,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -109,7 +109,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -124,7 +124,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -139,7 +139,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -154,7 +154,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_eastward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_eastward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -168,7 +168,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_northward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_northward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -182,7 +182,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_upward_air_velocity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_upward_air_velocity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -196,7 +196,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_mean_winds', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_mean_winds', np.int8, ('time', 'altitude',))
@@ -212,7 +212,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_wind_component_eastward', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_wind_component_eastward', np.int8, ('time', 'altitude',))
@@ -228,7 +228,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_wind_component_northward', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_wind_component_northward', np.int8, ('time', 'altitude',))
@@ -244,7 +244,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_wind_component_upward_air_velocity', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_wind_component_upward_air_velocity', np.int8, ('time', 'altitude',))
@@ -260,7 +260,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_backscatter', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_backscatter', np.int8, ('time', 'altitude',))
@@ -276,7 +276,7 @@ def acoustic_backscatter_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_background_noise', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_background_noise', np.int8, ('time', 'altitude',))
@@ -512,7 +512,7 @@ def aerosol_backscatter_radial_winds(meta, mode, opt, nc, ver):
       
    del dat, com, np, range_1d, data_1d, flag_1d, AZ_2d, EL_2d, range_3d, data_3d, flag_3d   
     
-def aerosol_backscatter(meta, mode, nc, ver):
+def aerosol_backscatter(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -557,7 +557,7 @@ def aerosol_backscatter(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -566,7 +566,7 @@ def aerosol_backscatter(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)   
 
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -579,12 +579,12 @@ def aerosol_backscatter(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
       
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('attenuated_aerosol_backscatter_coefficient', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('attenuated_aerosol_backscatter_coefficient', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -598,7 +598,7 @@ def aerosol_backscatter(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)   
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('range_squared_corrected_backscatter_power', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('range_squared_corrected_backscatter_power', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -724,7 +724,7 @@ def aerosol_backscatter(meta, mode, nc, ver):
    #write data
    v[:] = np.float32(data_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag', np.float32, ('time', 'altitude',))
@@ -795,7 +795,7 @@ def aerosol_concentration(meta, mode, nc, ver):
    
    del dat, com, np, data_1d, flag_1d 
          
-def aerosol_extinction(meta, mode, nc, ver):
+def aerosol_extinction(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -833,7 +833,7 @@ def aerosol_extinction(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -842,7 +842,7 @@ def aerosol_extinction(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)   
 
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -855,12 +855,12 @@ def aerosol_extinction(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_355', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_355', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -874,7 +874,7 @@ def aerosol_extinction(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)   
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -888,7 +888,7 @@ def aerosol_extinction(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_355', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_355', np.float32, ('time', 'altitude',))
@@ -904,7 +904,7 @@ def aerosol_extinction(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_316', np.float32, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_316', np.float32, ('time', 'altitude',))

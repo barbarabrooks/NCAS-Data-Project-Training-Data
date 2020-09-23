@@ -71,9 +71,9 @@ def variables(nc, ET, DT, DoY, lat, lon, mode):
    #time
    v = nc.createVariable('time', np.float64, ('time',))
    #variable attributes
-   v.units = 'v since 1970-01-01 00:00:00'
+   v.units = 'seconds since 1970-01-01 00:00:00'
    v.standard_name = 'time'
-   v.long_name = 'Time (v since 1970-01-01) 00:00:00'
+   v.long_name = 'Time (seconds since 1970-01-01 00:00:00)'
    v.axis = 'T'
    v.valid_min = np.float64(min(ET))
    v.valid_max = np.float64(max(ET))

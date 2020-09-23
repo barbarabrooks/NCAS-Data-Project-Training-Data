@@ -1396,7 +1396,7 @@ def flux_estimates(meta, mode, nc, ver):
    
    del dat, com, np, data_1d, flag_1d   
          
-def full_troposphere_temperature_profiles(meta, mode, nc, ver):
+def full_troposphere_temperature_profiles(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -1434,7 +1434,7 @@ def full_troposphere_temperature_profiles(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -1443,7 +1443,7 @@ def full_troposphere_temperature_profiles(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)   
 
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -1456,12 +1456,12 @@ def full_troposphere_temperature_profiles(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('air_temperature', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('air_temperature', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)

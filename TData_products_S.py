@@ -89,7 +89,7 @@ def sf6_concentration(meta, mode, nc, ver):
    
    del dat, com, np, data_1d, flag_1d          
          
-def size_concentration_spectra(meta, mode, nc, ver):
+def size_concentration_spectra(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -132,7 +132,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
    
    # write specific dimensions
    index_bin = nc.createDimension('index_bin', bins)
-   if '1' in ver:
+   if '1' in vocab_ver:
       index_range = nc.createDimension('index_range', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -140,7 +140,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
    # write common variables
    com.variables(nc, ET, DT, DoY, lat, lon, mode)  
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index_range',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -153,12 +153,12 @@ def size_concentration_spectra(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)  
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('spectral_reflectivity', np.float32, ('time', 'index_range', 'index_bin',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('spectral_reflectivity', np.float32, ('time', 'altitude', 'index_bin',), fill_value=-1.00e+20)
@@ -172,7 +172,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
    #write data
    v[:,:,:] = np.float32(data_3d)  
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('rain_drop_diameter', np.float32, ('time', 'index_range', 'index_bin',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('rain_drop_diameter', np.float32, ('time', 'altitude', 'index_bin',), fill_value=-1.00e+20)
@@ -186,7 +186,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
    #write data
    v[:,:,:] = np.float32(data_3d)  
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('drop_size_distribution', np.float32, ('time', 'index_range', 'index_bin',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('drop_size_distribution', np.float32, ('time', 'altitude', 'index_bin',), fill_value=-1.00e+20)
@@ -200,7 +200,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
    #write data
    v[:,:,:] = np.float32(data_3d)   
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag', np.int8, ('time', 'index_range', 'index_bin',))
    else:
       v = nc.createVariable('qc_flag', np.int8, ('time', 'altitude', 'index_bin',))
@@ -218,7 +218,7 @@ def size_concentration_spectra(meta, mode, nc, ver):
 
    del dat, com, np, range_1d, alt_1d, data_1d, flag_1d, alt_2d, data_3d, flag_3d     
          
-def snr_winds(meta, mode, nc, ver):
+def snr_winds(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -256,7 +256,7 @@ def snr_winds(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -285,7 +285,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:] = np.float32(data_1d)
     
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -298,12 +298,12 @@ def snr_winds(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -318,7 +318,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -333,7 +333,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -348,7 +348,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -363,7 +363,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -378,7 +378,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_1', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_1', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -392,7 +392,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_2', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_2', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -406,7 +406,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_3', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('signal_to_noise_ratio_of_beam_3', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -420,7 +420,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('signal_to_noise_ratio_minimum', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('signal_to_noise_ratio_minimum', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -434,7 +434,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('spectral_width_of_beam_1', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('spectral_width_of_beam_1', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -448,7 +448,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('spectral_width_of_beam_2', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('spectral_width_of_beam_2', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -462,7 +462,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('spectral_width_of_beam_3', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('spectral_width_of_beam_3', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -476,7 +476,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('skew_of_beam_1', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('skew_of_beam_1', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -490,7 +490,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('skew_of_beam_2', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('skew_of_beam_2', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -504,7 +504,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('skew_of_beam_3', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('skew_of_beam_3', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -518,7 +518,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
     
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_wind', np.int8, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_wind', np.int8, ('time', 'altitude',))
@@ -534,7 +534,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_beam_1', np.int8, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_beam_1', np.int8, ('time', 'altitude',))
@@ -550,7 +550,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_beam_2', np.int8, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_beam_2', np.int8, ('time', 'altitude',))
@@ -566,7 +566,7 @@ def snr_winds(meta, mode, nc, ver):
    #write data
    v[:,:] = np.int8(flag_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag_beam_3', np.int8, ('time', 'index',))
    else:
       v = nc.createVariable('qc_flag_beam_3', np.int8, ('time', 'altitude',))

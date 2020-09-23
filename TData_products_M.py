@@ -485,7 +485,7 @@ def mean_winds(meta, mode, nc, ver):
    
    del dat, com, np, data_1d, flag_1d   
          
-def mean_winds_profile(meta, mode, nc, ver):
+def mean_winds_profile(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -523,7 +523,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -532,7 +532,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)   
 
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -545,12 +545,12 @@ def mean_winds_profile(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_speed', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -565,7 +565,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_speed_of_gust', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_speed_of_gust', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -580,7 +580,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_from_direction', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -595,7 +595,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('wind_speed_of_gust_from_direction', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('wind_speed_of_gust_from_direction', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -609,7 +609,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('eastward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -624,7 +624,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('northward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -639,7 +639,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('upward_air_velocity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -654,7 +654,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -669,7 +669,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_wind_from_direction', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_wind_from_direction', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -683,7 +683,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_eastward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_eastward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -697,7 +697,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_northward_wind', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_northward_wind', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -711,7 +711,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d)
 
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('divergence_of_upward_air_velocity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('divergence_of_upward_air_velocity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -725,7 +725,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d) 
  
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('qc_flag', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('qc_flag', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -743,7 +743,7 @@ def mean_winds_profile(meta, mode, nc, ver):
    
    del dat, com, np, range_1d, alt_1d, data_1d, flag_1d, alt_2d, data_2d, flag_2d
          
-def moisture_profiles(meta, mode, nc, ver):
+def moisture_profiles(meta, mode, nc, ver, vocab_ver):
    import TData_data as dat
    import TData_common as com
    import numpy as np
@@ -781,7 +781,7 @@ def moisture_profiles(meta, mode, nc, ver):
    com.dimensions(nc, ET, lat, lon)
    
    # write specific dimensions
-   if '1' in ver:
+   if '1' in vocab_ver:
       index = nc.createDimension('index', gates)
    else:
       altitude = nc.createDimension('altitude', gates) 
@@ -790,7 +790,7 @@ def moisture_profiles(meta, mode, nc, ver):
    com.variables(nc, ET, DT, DoY, lat, lon, mode)   
 
    # write specific variables
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('altitude', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('altitude', np.float32, ('altitude',), fill_value=-1.00e+20)
@@ -803,12 +803,12 @@ def moisture_profiles(meta, mode, nc, ver):
    v.valid_max = np.float32(max(range_1d))
    v.coordinates = 'latitude longitude'
    #write data
-   if '1' in ver:
+   if '1' in vocab_ver:
       v[:,:] = np.float32(alt_2d)
    else:
       v[:] = np.float32(alt_1d)   
       
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('relative_humidity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('relative_humidity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
@@ -823,7 +823,7 @@ def moisture_profiles(meta, mode, nc, ver):
    #write data
    v[:,:] = np.float32(data_2d) 
    
-   if '1' in ver:
+   if '1' in vocab_ver:
       v = nc.createVariable('absolute_humidity', np.float32, ('time', 'index',), fill_value=-1.00e+20)
    else:
       v = nc.createVariable('absolute_humidity', np.float32, ('time', 'altitude',), fill_value=-1.00e+20)
