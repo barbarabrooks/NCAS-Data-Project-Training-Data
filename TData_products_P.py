@@ -591,7 +591,7 @@ def precipitation(meta, mode, nc, ver):
    nc.product_version = ver
    nc.setncattr('measurement_technique', 'drop_counting')
    nc.setncattr('measurement_quanta', '0.01 mm')
-   nc.setncattr('collection_throat_diameter', '20 cm')
+   nc.setncattr('collection_area', '20 cm2')
    nc.setncattr('laser_wavelength', '785 nm')
    nc.setncattr('laser_sample_area', '45 cm2')
    
@@ -716,16 +716,16 @@ def precipitation(meta, mode, nc, ver):
    #write data
    v[:] = np.float32(data_1d)
    
-   v = nc.createVariable('number_of_drops', np.float32, ('time',), fill_value=-1.00e+20)
+   v = nc.createVariable('number_of_drops', np.int32, ('time',), fill_value=-1.00e+09)
    #variable attributes
    v.units = '1'
    v.long_name = 'Number of Pulses\Drops Counted in Integration Period'
-   v.valid_min = np.float32(min_dat)
-   v.valid_max = np.float32(max_dat)
+   v.valid_min = np.int32(min_dat * 1000)
+   v.valid_max = np.int32(max_dat * 1000)
    v.cell_methods = 'time: mean'
    v.coordinates = 'latitude longitude'
    #write data
-   v[:] = np.float32(data_1d)
+   v[:] = np.int32(data_1d * 1000)
    
    v = nc.createVariable('equivalent_reflectivity_factor', np.float32, ('time',), fill_value=-1.00e+20)
    #variable attributes
