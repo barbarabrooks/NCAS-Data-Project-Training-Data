@@ -1,11 +1,15 @@
+import os
+from datetime import datetime
+
+from netCDF4 import Dataset
+
+
 def create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode):
-   from netCDF4 import Dataset
-   from datetime import datetime
    
    try:
       # create nc file
       from netCDF4 import Dataset
-      dout = 'Data\\'
+      dout = 'Data'
       f1 = nm # instrument name
       if mode == 'land':
          f2 = 'ral' # platform name
@@ -19,20 +23,22 @@ def create_NC_file(nm, dp, ver, opt1, opt2, opt3, logfile, mode):
       f6 = '.nc'
       
       if ((len(opt1)<1) and (len(opt2)<1) and (len(opt3)<1)):
-         fn = dout+f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+f5+f6         
+         fn = f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+f5+f6         
       if ((len(opt1)>1) and (len(opt2)<1) and (len(opt3)<1)):
-         fn = dout+f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+f5+f6
+         fn = f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+f5+f6
       if ((len(opt1)>1) and (len(opt2)>1) and (len(opt3)<1)):
-         fn = dout+f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+opt2+chr(95)+f5+f6
+         fn = f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+opt2+chr(95)+f5+f6
       if ((len(opt1)>1) and (len(opt2)>1) and (len(opt3)>1)):
-         fn = dout+f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+opt2+chr(95)+opt3+chr(95)+f5+f6
+         fn = f1+chr(95)+f2+chr(95)+f3+chr(95)+f4+chr(95)+opt1+chr(95)+opt2+chr(95)+opt3+chr(95)+f5+f6
 
-      nc = Dataset(fn, "w",  format = "NETCDF4_CLASSIC") 
+      output = os.path.join(dout, fn)
+      nc = Dataset(output, "w", format="NETCDF4_CLASSIC") 
    except:
       # exit if problem encountered
-      print('Unable to create: ',fn,'. This program will terminate')
+      err_msg = f'Unable to create: {output} . This program will terminate'
+      print(err_msg)
       g = open(logfile, 'a')
-      g.write(datetime.utcnow().isoformat()+' Unable to create: '+fn+'. This program will terminate\n')
+      g.write(datetime.utcnow().isoformat() + err_msg + '\n')
       g.close()
       exit()
       
